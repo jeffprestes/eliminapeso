@@ -28,13 +28,26 @@ body {
 </head>
 <body>
     <h1>Adiciona novo alimento</h1>
+    <h3>* Não acentuar o nome dos alimentos</h3>
     <table width="90%" border="1" cellpadding="0" cellspacing="0" bordercolor="#2A1F00" align="center">
 <form name="frm" id="frm" method="post" action="acoes.php">
   <input type="hidden" name="acao" id="acao" value="I" />
   <input type="hidden" name="origem" id="origem" value="alimento" />
   <input type="hidden" name="destino" id="destino" value="alimentos-insere.php" />  
   <tr>
-    <th scope="row"><table width="100%" cellpadding="0" cellspacing="2" id="tabElementos">
+    <th scope="row">
+        <table width="100%" cellpadding="0" cellspacing="2" id="tabElementos">
+            <tr>
+                <th colspan="2" align="center" scope="row">
+                  <div align="center">
+                    <input name="btnSalvar" type="button" class="botoes" id="btnSalvar" value="Salvar" onclick="document.frm.submit()" tabindex="6" />
+                                &nbsp;&nbsp;
+                                <input name="btnListar" type="button" class="botoes" id="btnListar" value="Listar" onclick="document.location='alimentos-lista.php'" tabindex="7" />
+                    &nbsp;
+                    <input name="btnNova" type="button" class="botoes" id="btnNovaRefeicao" value="Nova Refei&ccedil;&atilde;o" onclick="document.location='pontos-insere.php'"/>
+                  </div>
+                </th>
+            </tr>
       <tr>
         <th width="15%" scope="row"><div align="right" class="labelCampo">Tipo: </div></th>
         <td width="85%" align="left">
