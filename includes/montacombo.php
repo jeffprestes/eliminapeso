@@ -1,4 +1,4 @@
-<?
+<?php
 
 function montaCombo($resCombo, $nomeobjeto, $valorpadrao)		{
 	if (mysql_num_rows($resCombo) > 0 )		{
@@ -182,7 +182,19 @@ function tiraAcentos($str)		{
 	$varNovo = str_replace("ê", "e", $varNovo);
 	$varNovo = str_replace("â", "a", $varNovo);
 	$varNovo = str_replace("ô", "o", $varNovo);
-	$varNovo = str_replace("à", "a", $varNovo);
+	$varNovo = str_replace("À", "A", $varNovo);
+        $varNovo = str_replace("Á", "A", $varNovo);
+	$varNovo = str_replace("É", "E", $varNovo);
+	$varNovo = str_replace("Ç", "C", $varNovo);
+	$varNovo = str_replace("Í", "I", $varNovo);
+	$varNovo = str_replace("Ú", "U", $varNovo);
+	$varNovo = str_replace("Ó", "O", $varNovo);
+	$varNovo = str_replace("Ã", "A", $varNovo);
+	$varNovo = str_replace("Õ", "O", $varNovo);
+	$varNovo = str_replace("Ê", "E", $varNovo);
+	$varNovo = str_replace("Â", "A", $varNovo);
+	$varNovo = str_replace("Ô", "O", $varNovo);
+	$varNovo = str_replace("À", "A", $varNovo);
 
 	//$varNovo = htmlentities($str);
 	return $varNovo;
