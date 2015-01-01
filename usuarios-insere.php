@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tabela Elimina Peso - Usu&aacute;rios - Inclus&atilde;o</title>
 <style type="text/css">
 <!--
@@ -22,63 +23,63 @@ body {
 <link href="estilos.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<table width="232" border="1" cellpadding="0" cellspacing="0" bordercolor="#2A1F00">
+<table width="99%" border="1" cellpadding="0" cellspacing="0" bordercolor="#2A1F00">
 <form name="frm" id="frm" method="post" action="acoes.php">
   <input type="hidden" name="acao" id="acao" value="I" />
   <input type="hidden" name="origem" id="origem" value="usuario" />
   <input type="hidden" name="destino" id="destino" value="pontos-insere.php" />
   <tr>
-    <th scope="row"><table width="230" cellpadding="0" cellspacing="2" id="tabElementos">
+    <th scope="row"><table width="99%" cellpadding="0" cellspacing="2" id="tabElementos">
       <tr>
           <th colspan="2" class="tabelaTitulo" scope="row"><div style="align:center">Insira seus dados pessoais abaixo <br /> para ter acesso ao sistema</div></th>
       </tr>
       <tr>
-        <th width="75" scope="row"><div align="right" class="labelCampo">Nome: * </div></th>
-        <td width="147" align="left"><input name="nome" type="text" class="caixaTexto" id="nome" value="" size="30" maxlength="45" tabindex="1" /></td>
+        <th width="25%" scope="row"><div align="right" class="labelCampo">Nome: * </div></th>
+        <td width="75%" align="left"><input name="nome" type="text" class="caixaTexto" id="nome" value="" size="30" maxlength="45" tabindex="1" /></td>
       </tr>
       <tr>
-        <th width="75" scope="row"><div align="right" class="labelCampo">Email: * </div></th>
-        <td width="147" align="left"><input name="email" type="text" class="caixaTexto" id="email" size="30" maxlength="45" tabindex="2" /></td>
+        <th scope="row"><div align="right" class="labelCampo">Email: * </div></th>
+        <td align="left"><input name="email" type="text" class="caixaTexto" id="email" size="30" maxlength="45" tabindex="2" /></td>
       </tr>
       <tr>
-        <th width="75" scope="row"><div align="right" class="labelCampo">Senha: * </div></th>
-        <td width="147" align="left"><input name="senha" type="password" class="caixaTexto" id="senha" value="" size="8" maxlength="8" tabindex="3" /></td>
+        <th scope="row"><div align="right" class="labelCampo">Senha: * </div></th>
+        <td align="left"><input name="senha" type="password" class="caixaTexto" id="senha" value="" size="8" maxlength="8" tabindex="3" /></td>
       </tr>
       <tr>
-        <th width="75" scope="row"><div align="right" class="labelCampo">Sexo: * </div></th>
-        <td width="147" align="left"><select name="sexo" class="caixaTexto" id="sexo" tabindex="4">
+        <th scope="row"><div align="right" class="labelCampo">Sexo: * </div></th>
+        <td align="left"><select name="sexo" class="caixaTexto" id="sexo" tabindex="4">
           <option selected="selected"> -- </option>
 <option value="M">Masculino</option>
           <option value="F">Feminino</option>
         </select></td>
       </tr>
       <tr>
-        <th width="75" scope="row"><div align="right" class="labelCampo">Data Nasc: * </div></th>
-        <td width="147" align="left"><input name="dia" type="text" class="caixaTexto" id="dia" tabindex="1" value="" onkeypress="mascara(this,soNumeros)" size="2" maxlength="2" tabindex="5"
+        <th scope="row"><div align="right" class="labelCampo">Data Nasc: * </div></th>
+        <td align="left"><input name="dia" type="text" class="caixaTexto" id="dia" tabindex="1" value="" onkeypress="mascara(this,soNumeros)" size="2" maxlength="2" tabindex="5"
                                      /
                                      <input name="mes" type="text" class="caixaTexto" id="mes" tabindex="2" value="" size="2" maxlength="2" tabindex="6" onkeypress="mascara(this,soNumeros)" />
                                      /
                                      <input name="ano" type="text" class="caixaTexto" id="ano" tabindex="3" value="" size="4" maxlength="4" tabindex="7" onkeypress="mascara(this,soNumeros)" /></td>
       </tr>
       <tr>
-        <th width="75" scope="row"><div align="right" class="labelCampo">Nro Vigilante:</div></th>
-        <td width="147" align="left"><input name="nroVigilantes" type="text" class="caixaTexto" id="nroVigilantes" onkeypress="mascara(this,soNumeros)" size="8" maxlength="8" tabindex="8" /></td>
+        <th scope="row"><div align="right" class="labelCampo">Nro Programa:</div></th>
+        <td align="left"><input name="nroVigilantes" type="text" class="caixaTexto" id="nroVigilantes" onkeypress="mascara(this,soNumeros)" size="8" maxlength="8" tabindex="8" /></td>
       </tr>
       <tr>
-        <th width="75" scope="row"><div align="right" class="labelCampo">Peso Meta:</div></th>
-        <td width="147" align="left"><input name="pesoMeta" type="text" class="caixaTexto" id="pesoMeta" size="6" maxlength="6" tabindex="9" onkeypress="mascara(this,soNumeroDecimais)" /></td>
+        <th scope="row"><div align="right" class="labelCampo">Peso Meta:</div></th>
+        <td align="left"><input name="pesoMeta" type="text" class="caixaTexto" id="pesoMeta" size="6" maxlength="6" tabindex="9" onkeypress="mascara(this,soNumeroDecimais)" /></td>
       </tr>
       <tr>
-        <th width="75" scope="row"><div align="right" class="labelCampo">Peso Atual:</div></th>
-        <td width="147" align="left"><input name="pesoAtual" type="text" class="caixaTexto" id="pesoAtual" size="6" maxlength="6" tabindex="10" onkeypress="mascara(this,soNumeroDecimais)" /></td>
+        <th scope="row"><div align="right" class="labelCampo">Peso Atual:</div></th>
+        <td align="left"><input name="pesoAtual" type="text" class="caixaTexto" id="pesoAtual" size="6" maxlength="6" tabindex="10" onkeypress="mascara(this,soNumeroDecimais)" /></td>
       </tr>
       <tr>
-        <th width="75" scope="row"><div align="right" class="labelCampo">Pontos atual:</div></th>
-        <td width="147" align="left"><input name="metaPontos" type="text" class="caixaTexto" id="metaPontos" size="2" maxlength="2" tabindex="11" onkeypress="mascara(this,soNumeros)" /></td>
+        <th scope="row"><div align="right" class="labelCampo">Pontos atual:</div></th>
+        <td align="left"><input name="metaPontos" type="text" class="caixaTexto" id="metaPontos" size="2" maxlength="2" tabindex="11" onkeypress="mascara(this,soNumeros)" /></td>
       </tr>
       <tr>
-        <th width="75" scope="row"><div align="right" class="labelCampo">Altura:</div></th>
-        <td width="147" align="left"><input name="altura" type="text" class="caixaTexto" id="altura" size="4" maxlength="4" tabindex="12" onkeypress="mascara(this,soNumeroDecimais)" /></td>
+        <th scope="row"><div align="right" class="labelCampo">Altura:</div></th>
+        <td align="left"><input name="altura" type="text" class="caixaTexto" id="altura" size="4" maxlength="4" tabindex="12" onkeypress="mascara(this,soNumeroDecimais)" /></td>
       </tr>
       <tr>
         <th scope="row"><div align="right"></div></th>
