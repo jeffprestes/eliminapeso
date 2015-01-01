@@ -27,6 +27,7 @@ body {
 <link href="estilos.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <h1>Lista de alimentos</h1>
 <table width="90%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#2A1F00">
 <form name="frm" id="frm" method="post" action="acoes.php">
   <input type="hidden" name="acao" id="acao" value="I" />
@@ -42,7 +43,7 @@ body {
             <td width="14%">Pontos</td>
           </tr>
 <?
-$sql = "SELECT b.descricao as tipoAlimento, concat_ws(', ', a.alimento, concat_ws(' ', c.descricao, d.descricao)) as alimento, a.pontos";
+$sql = "SELECT b.descricao as tipoAlimento, a.cod_alimento, concat_ws(', ', a.alimento, concat_ws(' ', c.descricao, d.descricao)) as alimento, a.pontos";
 $sql .= " FROM alimentos a, tipo_alimentos b, quantidades c, medidas d";
 $sql .= " WHERE a.cod_tipo_alimento = b.cod_tipo_alimento and a.cod_quant = c.cod_quant and a.cod_medida = d.cod_medida";
 $sql .= " ORDER BY a.alimento, b.descricao ";
@@ -54,14 +55,14 @@ if (mysql_num_rows($res)>0)	{
 	 	if ($i==0)	{
 			echo "<tr class='tabelaLinha'>\n";
 	        echo "    <td class='celulaEsquerda'>" . $lin->tipoAlimento . "</td>\n";
-	        echo "    <td class='celulaEsquerda'>" . $lin->alimento . "</td>\n";
+	        echo "    <td class='celulaEsquerda'><a name='" . $lin->cod_alimento . "' href='alimentos-edita.php?cod_alimento=" . $lin->cod_alimento . "'>" . $lin->alimento . "</a></td>\n";
 	        echo "    <td class='celulaCentro'>" . $lin->pontos . "</td>\n";
 	        echo "</tr>\n";		
 	        $i=1;
 	    }	else	{
 			echo "<tr class='tabelaLinhaAmarelo'>\n";
 	        echo "    <td class='celulaEsquerda'>" . $lin->tipoAlimento . "</td>\n";
-	        echo "    <td class='celulaEsquerda'>" . $lin->alimento . "</td>\n";
+	        echo "    <td class='celulaEsquerda'><a name='" . $lin->cod_alimento . "' href='alimentos-edita.php?cod_alimento=" . $lin->cod_alimento . "'>" . $lin->alimento . "</td>\n";
 	        echo "    <td class='celulaCentro'>" . $lin->pontos . "</td>\n";
 	        echo "</tr>\n";		
 	        $i=0;
@@ -96,6 +97,10 @@ mysql_free_result($res);
   </tr>
   </form>
 </table>
+    <script>
+        //Chama a ancora do ultimo alimento inserido ou alterado
+        this.location = "#" + 463;
+    </script>
 </body>
 </html>
 <?
