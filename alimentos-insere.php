@@ -27,6 +27,7 @@ body {
 <link href="estilos.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <h1>Adiciona novo alimento</h1>
     <table width="90%" border="1" cellpadding="0" cellspacing="0" bordercolor="#2A1F00" align="center">
 <form name="frm" id="frm" method="post" action="acoes.php">
   <input type="hidden" name="acao" id="acao" value="I" />
