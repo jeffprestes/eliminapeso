@@ -1,4 +1,4 @@
-<?
+<?php
 include "includes/conexao.php";
 include "includes/montacombo.php";
 ?>
@@ -34,14 +34,25 @@ body {
   <input type="hidden" name="origem" id="origem" value="alimento" />
   <input type="hidden" name="destino" id="destino" value="alimentos-insere.php" />  
   <tr>
-    <th scope="row"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
-          <tr class="tabelaTitulo">
-            <td width="21%">Tipo</td>
-            <td width="65%">Alimento</td>
-            <td width="14%">Pontos</td>
-          </tr>
+    <th scope="row">
+        <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td align="center">
+                    <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                        <tr class="tabelaTitulo">
+                            <td width="45%" align="center"><input name="btnIncluir" type="button" class="botoes" id="btnIncluir" value="Incluir Alimento" onclick="document.location='alimentos-insere.php'"/></td>
+                            <td width="55%" align="center"><input name="btnNova" type="button" class="botoes" id="btnNovaRefeicao" value="Nova Refeição" onclick="document.location='pontos-insere.php'"/></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+              <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                <tr class="tabelaTitulo">
+                  <td width="21%">Tipo</td>
+                  <td width="65%">Alimento</td>
+                  <td width="14%">Pontos</td>
+                </tr>
 <?
 $sql = "SELECT b.descricao as tipoAlimento, a.cod_alimento, concat_ws(', ', a.alimento, concat_ws(' ', c.descricao, d.descricao)) as alimento, a.pontos";
 $sql .= " FROM alimentos a, tipo_alimentos b, quantidades c, medidas d";
@@ -87,7 +98,7 @@ mysql_free_result($res);
         <td align="center">
         	<table width="100%"  border="0" cellspacing="0" cellpadding="0">
           		<tr class="tabelaTitulo">
-           		  <td width="45%" align="center"><input name="btnIncluir" type="button" class="botoes" id="btnIncluir" value="Incluir" onclick="document.location='alimentos-insere.php'"/></td>
+           		  <td width="45%" align="center"><input name="btnIncluir" type="button" class="botoes" id="btnIncluir" value="Incluir alimento" onclick="document.location='alimentos-insere.php'"/></td>
             		<td width="55%" align="center"><input name="btnNova" type="button" class="botoes" id="btnNovaRefeicao" value="Nova Refeição" onclick="document.location='pontos-insere.php'"/></td>
 				</tr>
 			</table>
@@ -99,7 +110,7 @@ mysql_free_result($res);
 </table>
     <script>
         //Chama a ancora do ultimo alimento inserido ou alterado
-        this.location = "#" + 463;
+        this.location = "#" + <?=$_GET["cod_alimento"]?>;
     </script>
 </body>
 </html>
