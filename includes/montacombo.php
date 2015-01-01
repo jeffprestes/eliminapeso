@@ -11,7 +11,7 @@ function montaCombo($resCombo, $nomeobjeto, $valorpadrao)		{
 			exit();
 		}
 
-		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='combobox'>";
+		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='" .  retornaCssClassCombo() . "'>";
 		echo "<option value='null' selected>&nbsp;</option>";
 		//É necessário que a query tenha dois campos objCodigo e outro objDescricao
 		while ($lin = mysql_fetch_object($resCombo))	{
@@ -36,7 +36,7 @@ function montaCombo($resCombo, $nomeobjeto, $valorpadrao)		{
 
 function montaComboComFuncao($resCombo, $nomeobjeto, $valorpadrao, $funcao)		{
 	if (mysql_num_rows($resCombo) > 0 )		{
-		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='combobox' " . $funcao . ">";
+		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='" .  retornaCssClassCombo() . "' " . $funcao . ">";
 		echo "<option value='null' selected>&nbsp;</option>";
 		//É necessário que a query tenha dois campos objCodigo e outro objDescricao
 		while ($lin = mysql_fetch_object($resCombo))	{
@@ -54,7 +54,7 @@ function montaComboComFuncao($resCombo, $nomeobjeto, $valorpadrao, $funcao)		{
 
 function montaComboComFuncaoComTabIndex($resCombo, $nomeobjeto, $valorpadrao, $funcao, $tabIndex)		{
 	if (mysql_num_rows($resCombo) > 0 )		{
-		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='combobox' " . $funcao . " tabIndex='" . $tabIndex . "'>";
+		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='" .  retornaCssClassCombo() . "' " . $funcao . " tabIndex='" . $tabIndex . "'>";
 		echo "<option value='null' selected>&nbsp;</option>";
 		//É necessário que a query tenha dois campos objCodigo e outro objDescricao
 		while ($lin = mysql_fetch_object($resCombo))	{
@@ -72,7 +72,7 @@ function montaComboComFuncaoComTabIndex($resCombo, $nomeobjeto, $valorpadrao, $f
 
 function montaComboComFuncaoComTabIndexVazio($resCombo, $nomeobjeto, $valorpadrao, $funcao, $tabIndex)		{
 	if (mysql_num_rows($resCombo) > 0 )		{
-		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='combobox' " . $funcao . " tabIndex='" . $tabIndex . "'>";
+		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='" .  retornaCssClassCombo() . "' " . $funcao . " tabIndex='" . $tabIndex . "'>";
 		echo "<option value='' selected></option>";
 		//É necessário que a query tenha dois campos objCodigo e outro objDescricao
 		while ($lin = mysql_fetch_object($resCombo))	{
@@ -272,5 +272,9 @@ function temCliCodigoNaTabela($tab, $lnk)			{
 	}
 
 	return false;
+}
+
+function retornaCssClassCombo()     {
+    return "combobox custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left ui-autocomplete-input";
 }
 ?>
