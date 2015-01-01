@@ -89,7 +89,7 @@ function montaComboComFuncaoComTabIndexVazio($resCombo, $nomeobjeto, $valorpadra
 }
 
 function montaComboDiaSemana($nomeobjeto, $valorpadrao)		{
-	echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='combobox'>";
+	echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='" .  retornaCssClassCombo() . "'>";
 	echo "<option value='null' selected>&nbsp;</option>";
 	//Dia da semana - 0 = segunda, 1 = terça, seguindo a função weekday do mysql
 	$z = 0;
