@@ -1,0 +1,103 @@
+.botoes {
+	font-family: "Trebuchet MS", Arial, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}
+.labelCampo {
+	font-family: Tahoma, "Arial Narrow", "MS Outlook", Verdana;
+	font-size: 9px;
+	font-weight: bold;
+	color: #2A0000;
+}
+.combos {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #2A0000;
+}
+.combobox {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #2A0000;
+}
+.caixaTexto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #2A0000;
+}
+.tabelaTitulo	{
+	background-color: White;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: bold;
+	color: Black;
+	height: 20px;
+	text-align: center;
+}
+.tabelaLinha	{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: Black;
+}
+.tabelaLinhaAmarelo	{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: Black;
+	background-color:#FFFFCC;
+}
+.celulaDireita	{
+	text-align:right;
+}
+.celulaEsquerda	{
+	text-align:left;
+	padding-left:2px;
+}
+.celulaEsquerdaSubTitulo	{
+	text-align:left;
+	padding-left:2px;
+	font-weight:bold;
+}
+.celulaEsquerdaData	{
+	text-align:left;
+	padding-left:2px;
+	padding-top:2px;
+	padding-bottom:2px;
+	font-weight:bold;
+	font-style:italic;
+}
+.celulaCentro	{
+	text-align:center;
+}
+
+a.linkDelecao:link {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: Black;
+	text-decoration:none
+}
+
+a.linkDelecao:visited {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: Black;
+	text-decoration:none
+}
+
+a.linkDelecao:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: Black;
+	text-decoration:underline
+}
+a.linkDelecao:active {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: Black;
+	text-decoration:none
+}
