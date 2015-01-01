@@ -1,7 +1,8 @@
-<?
+<?php
 session_start();
 
 include 'includes/conexao.php';
+include './includes/montacombo.php';
 
 //Para onde a página será redirecionada
 $varDestino = $_POST["destino"];
@@ -10,7 +11,7 @@ if ($_POST["acao"] == "I")   {
 	if ($_POST["origem"] == "alimento")     {
 
 		$sql = " INSERT INTO alimentos (alimento, pontos, cod_tipo_alimento, cod_medida, cod_quant)";
-		$sql .= " values ('" . $_POST['alimento'] . "', " . $_POST['pontos'] . ", " . $_POST['cod_tipo_alimento'] . ", ";
+		$sql .= " values ('" . tiraAcentos(trim($_POST['alimento'])) . "', " . $_POST['pontos'] . ", " . $_POST['cod_tipo_alimento'] . ", ";
 		$sql .= $_POST['cod_medida'] . ", " . $_POST['cod_quant'] . ")";
 		
 		if (!executaIDU($sql, $link))	{
@@ -99,7 +100,28 @@ if ($_GET["acao"] == "D")      {
 
 if ($_POST["acao"]=="A")     {
     
-    if ($_POST["origem"]=="login")   {
+    if ($_POST["origem"]=="alimento")   {
+        
+        $sql = "update alimentos set ";
+        $sql .= "alimento = '" . tiraAcentos(trim($_POST["alimento"])) . "', ";
+        $sql .= "pontos = " . $_POST["pontos"] . ", ";
+        $sql .= "cod_tipo_alimento = " . $_POST["cod_tipo_alimento"] . ", ";
+        $sql .= "cod_medida = " . $_POST["cod_medida"] . ", ";
+        $sql .= "cod_quant = " . $_POST["cod_quant"] . ", ";
+        $sql .= "ehAlimPleno = " . $_POST["ehAlimPleno"] . " ";
+        $sql .= "where ";
+        $sql .= "cod_alimento = " . $_POST["cod_alimento"] . " ";
+        $res = mysql_query($sql, $link);
+        
+        $retorno = mysql_query($sql, $link);
+        
+        if ($retorno)   {
+            $varDestino .= "?cod_alimento=" . $_POST["cod_alimento"];
+        }   else    {
+            $varDestino = "alimentos-edita.php?cod_alimento=" . $_POST["cod_alimento"];
+        }
+        
+    } else if ($_POST["origem"]=="login")   {
         $sql = "SELECT cod_usuario FROM usuarios where email='" . $_POST["email"] . "' and senha=SHA1('" . $_POST["senha"] . "')";
         //echo $sql . "<br />";
         $res = mysql_query($sql, $link);
@@ -110,9 +132,8 @@ if ($_POST["acao"]=="A")     {
         }   else    {
             $varDestino = "login-invalido.php";
         }
-    }
-
-    if ($_POST["origem"]=="esquecisenha")   {
+        
+    } else if ($_POST["origem"]=="esquecisenha")   {
         
         //echo $_POST["email"]; exit;
         
