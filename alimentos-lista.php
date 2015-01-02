@@ -40,6 +40,16 @@ body {
                 <td align="center">
                     <table width="100%"  border="0" cellspacing="0" cellpadding="0">
                         <tr class="tabelaTitulo">
+                            <td width="45%">&nbsp;</td>
+                            <td width="55%">&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                        <tr class="tabelaTitulo">
                             <td width="45%" align="center"><input name="btnIncluir" type="button" class="botoes" id="btnIncluir" value="Incluir Alimento" onclick="document.location='alimentos-insere.php'"/></td>
                             <td width="55%" align="center"><input name="btnNova" type="button" class="botoes" id="btnNovaRefeicao" value="Nova Refeição" onclick="document.location='pontos-insere.php'"/></td>
                         </tr>
@@ -47,17 +57,32 @@ body {
                 </td>
             </tr>
             <tr>
+                <td align="center">
+                    <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                        <tr class="tabelaTitulo">
+                            <td width="45%">&nbsp;</td>
+                            <td width="55%">&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
               <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                 <tr class="tabelaTitulo">
-                  <td width="21%">Tipo</td>
-                  <td width="65%">Alimento</td>
-                  <td width="14%">Pontos</td>
+                  <td width="20%">Tipo</td>
+                  <td width="50%">Alimento</td>
+                  <td width="10%">Pontos</td>
+                  <td width="10%">Nro Consumo</td>
+                  <td width="10%">&nbsp;</td>
                 </tr>
 <?
-$sql = "SELECT b.descricao as tipoAlimento, a.cod_alimento, concat_ws(', ', a.alimento, concat_ws(' ', c.descricao, d.descricao)) as alimento, a.pontos";
-$sql .= " FROM alimentos a, tipo_alimentos b, quantidades c, medidas d";
-$sql .= " WHERE a.cod_tipo_alimento = b.cod_tipo_alimento and a.cod_quant = c.cod_quant and a.cod_medida = d.cod_medida";
-$sql .= " ORDER BY a.alimento, b.descricao ";
+$sql = "SELECT \n"
+    . "b.descricao as tipoAlimento, a.cod_alimento, concat_ws(' ', a.alimento, concat_ws(' ', c.descricao, d.descricao)) as alimento, a.pontos, \n"
+    . "IFNULL(\n"
+    . " (select count(e.cod_alimento) from pontos as e where e.cod_alimento=a.cod_alimento group by e.cod_alimento)\n"
+    . " ,0) as nroUso \n"
+    . "FROM \n"
+    . "alimentos a, tipo_alimentos b, quantidades c, medidas d WHERE a.cod_tipo_alimento = b.cod_tipo_alimento and a.cod_quant = c.cod_quant and a.cod_medida = d.cod_medida ORDER BY a.alimento, b.descricao";
 //echo $sql;
 $res = mysql_query($sql, $link);
 $i = 0;
@@ -68,6 +93,8 @@ if (mysql_num_rows($res)>0)	{
 	        echo "    <td class='celulaEsquerda'>" . $lin->tipoAlimento . "</td>\n";
 	        echo "    <td class='celulaEsquerda'><a name='" . $lin->cod_alimento . "' href='alimentos-edita.php?cod_alimento=" . $lin->cod_alimento . "'>" . $lin->alimento . "</a></td>\n";
 	        echo "    <td class='celulaCentro'>" . $lin->pontos . "</td>\n";
+                echo "    <td class='celulaCentro'>" . $lin->nroUso . "</td>\n";
+                echo "    <td class='celulaCentro'><a href='acoes.php?cod_alimento=" . $lin->cod_alimento . "&acao=E&origem=alimento&destino=alimentos-lista.php'>Excluir</a></td>\n";
 	        echo "</tr>\n";		
 	        $i=1;
 	    }	else	{
@@ -75,6 +102,8 @@ if (mysql_num_rows($res)>0)	{
 	        echo "    <td class='celulaEsquerda'>" . $lin->tipoAlimento . "</td>\n";
 	        echo "    <td class='celulaEsquerda'><a name='" . $lin->cod_alimento . "' href='alimentos-edita.php?cod_alimento=" . $lin->cod_alimento . "'>" . $lin->alimento . "</td>\n";
 	        echo "    <td class='celulaCentro'>" . $lin->pontos . "</td>\n";
+                echo "    <td class='celulaCentro'>" . $lin->nroUso . "</td>\n";
+                echo "    <td class='celulaCentro'><a href='acoes.php?cod_alimento=" . $lin->cod_alimento . "&acao=E&origem=alimento&destino=alimentos-lista.php'>Excluir</a></td>\n";
 	        echo "</tr>\n";		
 	        $i=0;
 		}
