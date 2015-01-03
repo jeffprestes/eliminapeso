@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 include "includes/conexao.php";
 include "includes/montacombo.php";
 
