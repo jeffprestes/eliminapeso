@@ -102,7 +102,7 @@ if ($_GET["acao"] == "D")      {
         if (!executaIDU($sql, $link))	{
             exit;
         }
-        $varDestino = $_GET["destino"];
+        $varDestino = $_GET["destino"] . "?cod_alimento=" . $_GET["codigoAlimentoAnterior"];
     }
 }
 

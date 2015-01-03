@@ -52,10 +52,11 @@ $res = mysql_query($sql, $link);
                                         Vezes Consumidas
                                 </td>
                                 <td>
-                                        &nbsp;
+                                        Excluir?
                                 </td>
                         </tr>
 <?
+    $codigoAlimentoAnterior = 0;
     while ($lin = mysql_fetch_array($res, MYSQL_ASSOC))   {
 ?>
         <tr>
@@ -63,7 +64,7 @@ $res = mysql_query($sql, $link);
                 <?=$lin["tipoAlimento"]?>
             </td>
             <td>
-                <a href="alimentos-edita.php?cod_alimento=<?=$lin["cod_alimento"]?>"><?=$lin["alimento"]?></a>
+                <a name="<?=$lin["cod_alimento"]?>" href="alimentos-edita.php?cod_alimento=<?=$lin["cod_alimento"]?>"><?=$lin["alimento"]?></a>
             </td>
             <td style="text-align: center">
                 <?=$lin["pontos"]?>
@@ -72,10 +73,10 @@ $res = mysql_query($sql, $link);
                 <?=$lin["nroUso"]?>
             </td>
             <td style="text-align: center">
-                <a href='acoes.php?cod_alimento=<?=$lin["cod_alimento"]?>&acao=D&origem=alimento&destino=alimentos-lista.php'>Excluir</a>
+                <a href='acoes.php?cod_alimento=<?=$lin["cod_alimento"]?>&acao=D&codigoAlimentoAnterior=<?=$codigoAlimentoAnterior?>&origem=alimento&destino=alimentos-lista.php'>Excluir</a>
             </td>
         </tr>
-<?
+<?      $codigoAlimentoAnterior=$lin["cod_alimento"];
     }
 ?>
                 </table>
