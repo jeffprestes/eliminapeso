@@ -41,8 +41,8 @@ body {
                 <th colspan="2" align="center" scope="row">
                   <div align="center">
                     <input name="btnSalvar" type="button" class="botoes" id="btnSalvar" value="Salvar" onclick="document.frm.submit()" tabindex="6" />
-                                &nbsp;&nbsp;
-                                <input name="btnListar" type="button" class="botoes" id="btnListar" value="Listar" onclick="document.location='alimentos-lista.php'" tabindex="7" />
+                    &nbsp;&nbsp;
+                    <input name="btnListar" type="button" class="botoes" id="btnListar" value="Listar" onclick="document.location='alimentos-lista.php'" tabindex="7" />
                     &nbsp;
                     <input name="btnNova" type="button" class="botoes" id="btnNovaRefeicao" value="Nova Refei&ccedil;&atilde;o" onclick="document.location='pontos-insere.php'"/>
                   </div>
@@ -60,14 +60,14 @@ body {
       </tr>
       <tr>
         <th scope="row"><div align="right" class="labelCampo">Nome:</div></th>
-        <td align="left"><input name="alimento" type="text" class="caixaTexto" id="alimento" value="" size="30" maxlength="45" tabindex="4" /></td>
+        <td align="left"><input name="alimento" type="text" class="caixaTexto" id="alimento" value="" size="30" maxlength="50" tabindex="2" /></td>
       </tr>      
       <tr>
         <th scope="row"><div align="right" class="labelCampo">Quantidade:</div></th>
         <td align="left">
 		<? $sql = "select cod_quant as objCodigo, descricao as objDescricao from quantidades order by descricao";
 		   $res = mysql_query($sql, $link);
-		   montaComboComFuncaoComTabIndex($res, "cod_quant", "", "", "2");
+		   montaComboComFuncaoComTabIndex($res, "cod_quant", "", "", "3");
 		   mysql_free_result($res);
 		 ?>
         </td>
@@ -77,7 +77,7 @@ body {
         <td align="left">
 	    <? $sql = "select cod_medida as objCodigo, descricao as objDescricao from medidas order by descricao";
 		   $res = mysql_query($sql, $link);
-		   montaComboComFuncaoComTabIndex($res, "cod_medida", "", "", "3");
+		   montaComboComFuncaoComTabIndex($res, "cod_medida", "", "", "4");
 		   mysql_free_result($res);
 		 ?>
         </td>
@@ -90,7 +90,7 @@ body {
       </tr>
       <tr>
         <th scope="row"><div align="right" class="labelCampo">É Alim. Pleno? </div></th>
-        <td align="left"><select name="ehAlimPleno" id="ehAlimPleno">
+        <td align="left"><select name="ehAlimPleno" id="ehAlimPleno" tabindex="6">
                             <option value="0" selected>Não</option>
                             <option value="1">Sim</option>
                         </select>

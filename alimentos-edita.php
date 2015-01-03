@@ -59,14 +59,14 @@ body {
       </tr>
       <tr>
         <th scope="row"><div align="right" class="labelCampo">Nome:</div></th>
-        <td align="left"><input name="alimento" type="text" class="caixaTexto" id="alimento" value="<?=$lin["alimento"]?>" size="30" maxlength="45" tabindex="4" /></td>
+        <td align="left"><input name="alimento" type="text" class="caixaTexto" id="alimento" value="<?=$lin["alimento"]?>" size="30" maxlength="50" tabindex="2" /></td>
       </tr>      
       <tr>
         <th scope="row"><div align="right" class="labelCampo">Quantidade:</div></th>
         <td align="left">
 		<? $sql = "select cod_quant as objCodigo, descricao as objDescricao from quantidades order by descricao";
 		   $res = mysql_query($sql, $link);
-		   montaComboComFuncaoComTabIndex($res, "cod_quant", $lin["cod_quant"], "", "2");
+		   montaComboComFuncaoComTabIndex($res, "cod_quant", $lin["cod_quant"], "", "3");
 		   mysql_free_result($res);
 		 ?>
         </td>
@@ -76,7 +76,7 @@ body {
         <td align="left">
 	    <? $sql = "select cod_medida as objCodigo, descricao as objDescricao from medidas order by descricao";
 		   $res = mysql_query($sql, $link);
-		   montaComboComFuncaoComTabIndex($res, "cod_medida", $lin["cod_medida"], "", "3");
+		   montaComboComFuncaoComTabIndex($res, "cod_medida", $lin["cod_medida"], "", "4");
 		   mysql_free_result($res);
 		 ?>
         </td>
@@ -89,7 +89,7 @@ body {
       </tr>
       <tr>
         <th scope="row"><div align="right" class="labelCampo">É Alim. Pleno? </div></th>
-        <td align="left"><select name="ehAlimPleno" id="ehAlimPleno">
+    <td align="left"><select name="ehAlimPleno" id="ehAlimPleno" tabindex="6">
                             <option value="0" <? if ($lin["ehAlimPleno"]==0) { echo "selected"; } ?>>Não</option>
                             <option value="1" <? if ($lin["ehAlimPleno"]==1) { echo "selected"; } ?>>Sim</option>
                         </select>
