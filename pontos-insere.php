@@ -327,10 +327,12 @@ if ($_GET["cod_tprefeicao"]==null)   {
                             <input name="btnMudarData" type="button" class="botoes" id="btnMudarData" value="Mudar data" onclick="mudarData();" tabindex="7" />
                                 &nbsp;&nbsp;            
                                 <input name="btnNovoAlimento" type="button" class="botoes" id="btnNovoAlimento" value="Novo Alimento" onclick="novoAlimento()" tabindex="9" />
+                                &nbsp;&nbsp;            
+                                <input name="btnListaAlimentos" type="button" class="botoes" id="btnListaAlimentos" value="Lista Alimentos" onclick="listaAlimentos()" tabindex="10" />
                                 &nbsp;&nbsp;
-                                <input name="btnRelatorioSemanal" type="button" class="botoes" id="btnRelatorioSemanal" value="Jornal Semanal" onclick="relatorioSemanal()" tabindex="10" />
+                                <input name="btnRelatorioSemanal" type="button" class="botoes" id="btnRelatorioSemanal" value="Jornal Semanal" onclick="relatorioSemanal()" tabindex="11" />
                     &nbsp;&nbsp;
-                    <input name="btnTrocaSenha" type="button" class="botoes" id="btnTrocaSenha" value="Troca Senha" onclick="trocaSenha()" tabindex="10" />
+                    <input name="btnTrocaSenha" type="button" class="botoes" id="btnTrocaSenha" value="Troca Senha" onclick="trocaSenha()" tabindex="12" />
                   </div></th>
                 </tr>
               <tr>
@@ -403,6 +405,10 @@ if ($_GET["cod_tprefeicao"]==null)   {
         <script language="javascript">
                 function novoAlimento()	{
                         document.location='alimentos-insere.php?destino=pontos-insere.php';
+                }
+                
+                function listaAlimentos()	{
+                        document.location='alimentos-lista.php';
                 }
 
                 function relatorioSemanal()		{
