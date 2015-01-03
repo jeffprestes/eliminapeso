@@ -89,11 +89,19 @@ if ($_POST["acao"] == "I")   {
 
 //Acao de exclusão
 if ($_GET["acao"] == "D")      {
+    
     if ($_GET["origem"] == "ponto")    {
         $sql = "DELETE FROM pontos WHERE cod_ponto = " . $_GET["cod_ponto"];
         if (!executaIDU($sql, $link))	{
 			exit;
 		}
+        $varDestino = $_GET["destino"];
+        
+    } else if ($_GET["origem"] == "alimento")    {
+        $sql = "DELETE FROM alimentos WHERE cod_alimento = " . $_GET["cod_alimento"];
+        if (!executaIDU($sql, $link))	{
+            exit;
+        }
         $varDestino = $_GET["destino"];
     }
 }
