@@ -49,6 +49,7 @@
 }
 .celulaDireita	{
 	text-align:right;
+        padding: 10px;
 }
 .celulaEsquerda	{
 	text-align:left;
