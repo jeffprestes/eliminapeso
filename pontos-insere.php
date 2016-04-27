@@ -3,7 +3,7 @@ include "includes/conexao.php";
 include "includes/montacombo.php";
 include 'includes/sessionhandle.php';
 
-//Define a data do dia do lançamento
+//Define a data do dia do lanï¿½amento
 if (isset($dataLanc))	{
 	$dataSql = $dataLanc;
 } else	{
@@ -12,7 +12,7 @@ if (isset($dataLanc))	{
 list($ano, $mes, $dia) = explode("-", $dataSql);
 $data = date("d/m/Y");
 
-//Define a refeição que provavelmente o cliente vai ter
+//Define a refeiï¿½ï¿½o que provavelmente o cliente vai ter
 //Caso uma refeicao nao tenha sido cadastrada nessa sessao, tenta advinhar baseando-se no horario
 if ($_GET["cod_tprefeicao"]==null)   {
     $tprefeicao = 0;
@@ -32,12 +32,10 @@ if ($_GET["cod_tprefeicao"]==null)   {
     $tprefeicao = $_GET["cod_tprefeicao"];
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-    <title>Tabela Elimina Peso - Pontos - Inclus&atilde;o</title>
+    <title>Tabela Elimina Peso - Pontos - InclusÃ£o</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
@@ -239,24 +237,26 @@ if ($_GET["cod_tprefeicao"]==null)   {
               <tr>
                   <?
                   $sql = "SELECT nome, metaPontos FROM usuarios u where cod_usuario = " . $cod_usuario;
-                  $res = mysql_query($sql, $link);
-                  if (mysql_errno($link)<1 && mysql_num_rows($res)>0)	{
-                                $nome = mysql_result($res, 0, 0);
-                                $metaPontos = mysql_result($res, 0, 1);
+                  $res = mysqli_query($link, $sql);
+                  if (mysqli_errno($link)<1 && mysqli_num_rows($res)>0)	{
+                        $row = mysqli_fetch_assoc($res);
+                        $nome = $row["nome"];
+                        $metaPontos =  $row["metaPontos"];
                   }	else	{
-                                $nome = "Usuário";
-                                $metaPontos = 0;
+                        $nome = "UsuÃ¡rio";
+                        $metaPontos = 0;
                   }
                   ?>
-                <th colspan="2" align="center" scope="row">Ol&aacute; <?=$nome?>! </th>
+                <th colspan="2" align="center" scope="row">OlÃ¡, <?=$nome?>! </th>
               </tr>
               <tr>
                   <?
                   $sql = "SELECT IFNULL(sum(valor), 0) total from pontos where cod_usuario = " . $cod_usuario . " and data = '" . $dataSql . "'";
                   //echo $sql;
-                  $res = mysql_query($sql, $link);
-                  if (mysql_errno($link)<1 && mysql_num_rows($res)>0)	{
-                                $totalPontos = mysql_result($res, 0, 0);
+                  $res = mysqli_query($link, $sql);
+                  if (mysqli_errno($link)<1 && mysqli_num_rows($res)>0)	{
+                    $row = mysqli_fetch_assoc($res);
+                                $totalPontos = $row["total"];
                   }	else	{
                                 $totalPontos = 0;
                   }
@@ -280,9 +280,9 @@ if ($_GET["cod_tprefeicao"]==null)   {
                 <td align="left">
                     <div class="ui-widget">
                     <? $sql = "SELECT cod_tprefeicao as objCodigo, desc_tprefeicao as objDescricao FROM tipo_refeicao ORDER BY ordem";
-                           $res = mysql_query($sql, $link);
+                           $res = mysqli_query($link, $sql);
                            montaComboComFuncaoComTabIndex($res, "cod_tprefeicao", $tprefeicao, "", "4");
-                           mysql_free_result($res);
+                           mysqli_free_result($res);
                          ?>
                     </div>
                 </td>
@@ -295,9 +295,9 @@ if ($_GET["cod_tprefeicao"]==null)   {
                                 $sql .= "FROM  alimentos a  , tipo_alimentos b  , quantidades c  , medidas d ";
                                 $sql .= "WHERE a.cod_tipo_alimento = b.cod_tipo_alimento and a.cod_quant = c.cod_quant and a.cod_medida = d.cod_medida ";
                                 $sql .= "ORDER BY a.alimento ";
-                           $res = mysql_query($sql, $link);
+                           $res = mysqli_query($link, $sql);
                            montaComboComFuncaoComTabIndexVazio($res, "cod_alimento", "", "", "5");
-                           mysql_free_result($res);
+                           mysqli_free_result($res);
                          ?></div></td>
               </tr>
               <tr>
@@ -343,11 +343,11 @@ if ($_GET["cod_tprefeicao"]==null)   {
         $sql .= " WHERE  a.cod_alimento = b.cod_alimento and b.cod_tprefeicao = c.cod_tprefeicao and b.cod_usuario =" . $cod_usuario . " and b.data = '" . $dataSql . "'";
         $sql .= " ORDER BY c.ordem";
         //echo $sql;
-        $res = mysql_query($sql, $link);
+        $res = mysqli_query($link, $sql);
         $i = 0;
         $tpRefeicao = "";
-        if (mysql_num_rows($res)>0)	{
-                while($lin = mysql_fetch_object($res))	{
+        if (mysqli_num_rows($res)>0)	{
+                while($lin = mysqli_fetch_object($res))	{
                         if ($tpRefeicao != $lin->desc_tprefeicao)	{
                                 $tpRefeicao = $lin->desc_tprefeicao;
                                 if ($i==0)	{
@@ -386,7 +386,7 @@ if ($_GET["cod_tprefeicao"]==null)   {
                     <td>&nbsp;</td>
                   </tr>		
         <? } 
-        mysql_free_result($res);
+        mysqli_free_result($res);
         ?>          
 
                 </table></th>
@@ -417,7 +417,7 @@ if ($_GET["cod_tprefeicao"]==null)   {
                         });
                         $("#cxMsg").html("");
                     }   else    {
-                        $("#cxMsg").html("Não foi encontrado ninguem com essas letras.");
+                        $("#cxMsg").html("Nï¿½o foi encontrado ninguem com essas letras.");
                     }
                 }
                 
@@ -428,7 +428,7 @@ if ($_GET["cod_tprefeicao"]==null)   {
 
                 function validaForm()		{
                         if (document.frm.qtde.value == "")	{
-                                alert("Você deve preencher o campo quantidade.");
+                                alert("VocÃª deve preencher o campo quantidade.");
                                 return false;
                         }	else	{
                                 document.frm.qtde.value = document.frm.qtde.value.replace("r", "1");
@@ -465,5 +465,5 @@ if ($_GET["cod_tprefeicao"]==null)   {
 </body>
 </html>
 <?
-mysql_close($link);
+mysqli_close($link);
 ?>

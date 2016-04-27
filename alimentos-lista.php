@@ -11,16 +11,15 @@ $sql = "SELECT \n"
     . "alimentos a, tipo_alimentos b, quantidades c, medidas d WHERE a.cod_tipo_alimento = b.cod_tipo_alimento and a.cod_quant = c.cod_quant and a.cod_medida = d.cod_medida ORDER BY a.alimento, b.descricao";
 
 //echo $sql;
-$res = mysql_query($sql, $link);
+$res = mysqli_query($link, $sql);
 //exit;
 ?>
 <html lang="pt-br">
     <head>
         <link rel="stylesheet" href="listagemalimentos.css" type="text/css"/>
         <link href="estilos.css" rel="stylesheet" type="text/css" />
-        <meta charset="ISO-8859-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-        <title>Tabela Elimina Peso - Alimentos - Inclus&atilde;o</title>
+        <title>Tabela Elimina Peso - Alimentos - InclusÃ£o</title>
         <style>
             body {
                 background-color: #C0DCC0;
@@ -33,7 +32,7 @@ $res = mysql_query($sql, $link);
         <div style="left:50%;width: 300px; margin: 0 auto;">
             <input name="btnIncluir" type="button" class="botoes" id="btnIncluir" value="Incluir Alimento" onclick="document.location='alimentos-insere.php'"/>
             <span style="width: 25px"></span>
-            <input name="btnNova" type="button" class="botoes" id="btnNovaRefeicao" value="Nova Refeição" onclick="document.location='pontos-insere.php'"/>
+            <input name="btnNova" type="button" class="botoes" id="btnNovaRefeicao" value="Nova RefeiÃ§Ã£o" onclick="document.location='pontos-insere.php'"/>
         </div>
         <div style='height: 30px'></div>
         <div class="ListagemAlimentos" style="width:99%">
@@ -57,7 +56,7 @@ $res = mysql_query($sql, $link);
                         </tr>
 <?
     $codigoAlimentoAnterior = 0;
-    while ($lin = mysql_fetch_array($res, MYSQL_ASSOC))   {
+    while ($lin = mysqli_fetch_assoc($res))   {
 ?>
         <tr>
             <td>
@@ -86,7 +85,7 @@ $res = mysql_query($sql, $link);
         <div style="margin-top: 100px; left:50%;width: 300px; margin: 0 auto;">
             <input name="btnIncluir" type="button" class="botoes" id="btnIncluir" value="Incluir Alimento" onclick="document.location='alimentos-insere.php'"/>
             <span style="width: 25px"></span>
-            <input name="btnNova" type="button" class="botoes" id="btnNovaRefeicao" value="Nova Refeição" onclick="document.location='pontos-insere.php'"/>
+            <input name="btnNova" type="button" class="botoes" id="btnNovaRefeicao" value="Nova RefeiÃ§Ã£o" onclick="document.location='pontos-insere.php'"/>
         </div>
     </body>
     <script>
@@ -94,6 +93,3 @@ $res = mysql_query($sql, $link);
         this.location = "#" + <?=$_GET["cod_alimento"]?>;
     </script>
 </html>
-<?
-mysql_close($link);
-?>

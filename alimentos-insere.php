@@ -5,9 +5,9 @@ include "includes/montacombo.php";
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-<title>Tabela Elimina Peso - Alimentos - Inclus&atilde;o</title>
+<title>Tabela Elimina Peso - Alimentos - InclusÃ£oo</title>
 <style type="text/css">
 <!--
 body,td,th {
@@ -28,7 +28,7 @@ body {
 </head>
 <body>
     <h1>Adiciona novo alimento</h1>
-    <h3>* Não acentuar o nome dos alimentos</h3>
+    <h3>* NÃ£o acentuar o nome dos alimentos</h3>
     <table width="90%" border="1" cellpadding="0" cellspacing="0" bordercolor="#2A1F00" align="center">
 <form name="frm" id="frm" method="post" action="acoes.php">
   <input type="hidden" name="acao" id="acao" value="I" />
@@ -52,9 +52,9 @@ body {
         <th width="15%" scope="row"><div align="right" class="labelCampo">Tipo: </div></th>
         <td width="85%" align="left">
 		<? $sql = "select cod_tipo_alimento as objCodigo, descricao as objDescricao from tipo_alimentos order by descricao";
-		   $res = mysql_query($sql, $link);
+		   $res = mysqli_query($link, $sql);
 		   montaComboComFuncaoComTabIndex($res, "cod_tipo_alimento", "", "", "1");
-		   mysql_free_result($res);
+		   mysqli_free_result($res);
 		 ?>
         </td>
       </tr>
@@ -66,9 +66,9 @@ body {
         <th scope="row"><div align="right" class="labelCampo">Quantidade:</div></th>
         <td align="left">
 		<? $sql = "select cod_quant as objCodigo, descricao as objDescricao from quantidades order by descricao";
-		   $res = mysql_query($sql, $link);
+		   $res = mysqli_query($link, $sql);
 		   montaComboComFuncaoComTabIndex($res, "cod_quant", "", "", "3");
-		   mysql_free_result($res);
+		   mysqli_free_result($res);
 		 ?>
         </td>
       </tr>
@@ -76,9 +76,9 @@ body {
         <th scope="row"><div align="right" class="labelCampo">Medida:</div></th>
         <td align="left">
 	    <? $sql = "select cod_medida as objCodigo, descricao as objDescricao from medidas order by descricao";
-		   $res = mysql_query($sql, $link);
+		   $res = mysqli_query($link, $sql);
 		   montaComboComFuncaoComTabIndex($res, "cod_medida", "", "", "4");
-		   mysql_free_result($res);
+		   mysqli_free_result($res);
 		 ?>
         </td>
       </tr>
@@ -89,9 +89,9 @@ body {
         <td align="left"><input name="pontos" type="text" class="caixaTexto" id="pontos" size="5" maxlength="2" tabindex="5" /></td>
       </tr>
       <tr>
-        <th scope="row"><div align="right" class="labelCampo">É Alim. Pleno? </div></th>
+        <th scope="row"><div align="right" class="labelCampo">Ã‰ Alim. Pleno? </div></th>
         <td align="left"><select name="ehAlimPleno" id="ehAlimPleno" tabindex="6">
-                            <option value="0" selected>Não</option>
+                            <option value="0" selected>NÃ£o</option>
                             <option value="1">Sim</option>
                         </select>
       </tr>
@@ -115,6 +115,3 @@ body {
 </table>
 </body>
 </html>
-<?
-mysql_close($link);
-?>

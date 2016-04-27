@@ -1,20 +1,20 @@
 <?php
 
 function montaCombo($resCombo, $nomeobjeto, $valorpadrao)		{
-	if (mysql_num_rows($resCombo) > 0 )		{
-		if (mysql_errno()>0)       {
-			echo mysql_errno() . "<br>";
-			echo mysql_error() . "<br><br>";
+	if (mysqli_num_rows($resCombo) > 0 )		{
+		if (mysqli_errno()>0)       {
+			echo mysqli_errno() . "<br>";
+			echo mysqli_error() . "<br><br>";
 			echo "Erro na operacao com o Banco de dados. <br>\n";
-			echo "Verifique os dados preenchidos. Se persistir o erro copie o cÛdigo acima, salve no bloco de notas e contate a Novatrix.<br>\n";
+			echo "Verifique os dados preenchidos. Se persistir o erro copie o codigo acima, salve no bloco de notas e contate a Novatrix.<br>\n";
 			echo "<a href=" . $destino . ">Voltar</a>\n";
 			exit();
 		}
 
 		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='" .  retornaCssClassCombo() . "'>";
 		echo "<option value='null' selected>&nbsp;</option>";
-		//… necess·rio que a query tenha dois campos objCodigo e outro objDescricao
-		while ($lin = mysql_fetch_object($resCombo))	{
+		//ÔøΩ necessÔøΩrio que a query tenha dois campos objCodigo e outro objDescricao
+		while ($lin = mysqli_fetch_object($resCombo))	{
 
 			$vDescricao = trim($lin->objDescricao);
 			if (strlen($vDescricao)>80)		{
@@ -35,11 +35,11 @@ function montaCombo($resCombo, $nomeobjeto, $valorpadrao)		{
 }
 
 function montaComboComFuncao($resCombo, $nomeobjeto, $valorpadrao, $funcao)		{
-	if (mysql_num_rows($resCombo) > 0 )		{
+	if (mysqli_num_rows($resCombo) > 0 )		{
 		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='" .  retornaCssClassCombo() . "' " . $funcao . ">";
 		echo "<option value='null' selected>&nbsp;</option>";
-		//… necess·rio que a query tenha dois campos objCodigo e outro objDescricao
-		while ($lin = mysql_fetch_object($resCombo))	{
+		//ÔøΩ necessÔøΩrio que a query tenha dois campos objCodigo e outro objDescricao
+		while ($lin = mysqli_fetch_object($resCombo))	{
 			if ($valorpadrao == $lin->objCodigo)	{
 				echo "<option value='" . $lin->objCodigo . "' selected>" . $lin->objDescricao . "</option>";
 			}	else	{
@@ -53,11 +53,11 @@ function montaComboComFuncao($resCombo, $nomeobjeto, $valorpadrao, $funcao)		{
 }
 
 function montaComboComFuncaoComTabIndex($resCombo, $nomeobjeto, $valorpadrao, $funcao, $tabIndex)		{
-	if (mysql_num_rows($resCombo) > 0 )		{
+	if (mysqli_num_rows($resCombo) > 0 )		{
 		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='" .  retornaCssClassCombo() . "' " . $funcao . " tabIndex='" . $tabIndex . "'>";
 		echo "<option value='null' selected>&nbsp;</option>";
-		//… necess·rio que a query tenha dois campos objCodigo e outro objDescricao
-		while ($lin = mysql_fetch_object($resCombo))	{
+		//ÔøΩ necessÔøΩrio que a query tenha dois campos objCodigo e outro objDescricao
+		while ($lin = mysqli_fetch_object($resCombo))	{
 			if ($valorpadrao == $lin->objCodigo)	{
 				echo "<option value='" . $lin->objCodigo . "' selected>" . $lin->objDescricao . "</option>";
 			}	else	{
@@ -71,11 +71,11 @@ function montaComboComFuncaoComTabIndex($resCombo, $nomeobjeto, $valorpadrao, $f
 }
 
 function montaComboComFuncaoComTabIndexVazio($resCombo, $nomeobjeto, $valorpadrao, $funcao, $tabIndex)		{
-	if (mysql_num_rows($resCombo) > 0 )		{
+	if (mysqli_num_rows($resCombo) > 0 )		{
 		echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='" .  retornaCssClassCombo() . "' " . $funcao . " tabIndex='" . $tabIndex . "'>";
 		echo "<option value='' selected></option>";
-		//… necess·rio que a query tenha dois campos objCodigo e outro objDescricao
-		while ($lin = mysql_fetch_object($resCombo))	{
+		//ÔøΩ necessÔøΩrio que a query tenha dois campos objCodigo e outro objDescricao
+		while ($lin = mysqli_fetch_object($resCombo))	{
 			if ($valorpadrao == $lin->objCodigo)	{
 				echo "<option value='" . $lin->objCodigo . "' selected>" . $lin->objDescricao . "</option>";
 			}	else	{
@@ -91,7 +91,7 @@ function montaComboComFuncaoComTabIndexVazio($resCombo, $nomeobjeto, $valorpadra
 function montaComboDiaSemana($nomeobjeto, $valorpadrao)		{
 	echo "<select name='" . $nomeobjeto . "' id='" . $nomeobjeto . "' class='" .  retornaCssClassCombo() . "'>";
 	echo "<option value='null' selected>&nbsp;</option>";
-	//Dia da semana - 0 = segunda, 1 = terÁa, seguindo a funÁ„o weekday do mysql
+	//Dia da semana - 0 = segunda, 1 = terÔøΩa, seguindo a funÔøΩÔøΩo weekday do mysql
 	$z = 0;
 	$dt = new DT;
 
@@ -147,12 +147,12 @@ function traduzParaUnicode($texto, $lnk)		{
 			$sql .= " WHERE ";
 			$sql .= " tabucCaracter like binary '" . $ch . "'";
 
-			$resUc = mysql_query($sql, $lnk);
-			if (mysql_num_rows($resUc) > 0)		{
-				if (strpos(mysql_result($resUc, 0, 0), ";")>0)		{
-					$retorno .= "&" . mysql_result($resUc, 0, 0);
+			$resUc = mysqli_query($lnk, $sql);
+			if (mysqli_num_rows($resUc) > 0)		{
+				if (strpos(mysqli_result($resUc, 0, 0), ";")>0)		{
+					$retorno .= "&" . mysqli_result($resUc, 0, 0);
 				}	else	{
-					$retorno .= "\u" . mysql_result($resUc, 0, 0);
+					$retorno .= "\u" . mysqli_result($resUc, 0, 0);
 				}
 			}	else	{
 				$retorno .= $ch;
@@ -162,7 +162,7 @@ function traduzParaUnicode($texto, $lnk)		{
 		}
 
 	}
-	mysql_free_result($resUc);
+	mysqli_free_result($resUc);
 
 	return $retorno;
 }
@@ -171,30 +171,29 @@ function traduzParaUnicode($texto, $lnk)		{
 function tiraAcentos($str)		{
 
 	$varNovo = $str;
-	$varNovo = str_replace("·", "a", $varNovo);
-	$varNovo = str_replace("È", "e", $varNovo);
-	$varNovo = str_replace("Á", "c", $varNovo);
-	$varNovo = str_replace("Ì", "i", $varNovo);
-	$varNovo = str_replace("˙", "u", $varNovo);
-	$varNovo = str_replace("Û", "o", $varNovo);
-	$varNovo = str_replace("„", "a", $varNovo);
-	$varNovo = str_replace("ı", "o", $varNovo);
-	$varNovo = str_replace("Í", "e", $varNovo);
-	$varNovo = str_replace("‚", "a", $varNovo);
-	$varNovo = str_replace("Ù", "o", $varNovo);
-	$varNovo = str_replace("¿", "A", $varNovo);
-        $varNovo = str_replace("¡", "A", $varNovo);
-	$varNovo = str_replace("…", "E", $varNovo);
-	$varNovo = str_replace("«", "C", $varNovo);
-	$varNovo = str_replace("Õ", "I", $varNovo);
-	$varNovo = str_replace("⁄", "U", $varNovo);
-	$varNovo = str_replace("”", "O", $varNovo);
-	$varNovo = str_replace("√", "A", $varNovo);
-	$varNovo = str_replace("’", "O", $varNovo);
-	$varNovo = str_replace(" ", "E", $varNovo);
-	$varNovo = str_replace("¬", "A", $varNovo);
-	$varNovo = str_replace("‘", "O", $varNovo);
-	$varNovo = str_replace("¿", "A", $varNovo);
+	$varNovo = str_replace("√°", "a", $varNovo);
+	$varNovo = str_replace("√©", "e", $varNovo);
+	$varNovo = str_replace("√ß", "c", $varNovo);
+	$varNovo = str_replace("√≠", "i", $varNovo);
+	$varNovo = str_replace("√∫", "u", $varNovo);
+	$varNovo = str_replace("√≥", "o", $varNovo);
+	$varNovo = str_replace("√¢", "a", $varNovo);
+	$varNovo = str_replace("√¥", "o", $varNovo);
+	$varNovo = str_replace("√™", "e", $varNovo);
+	$varNovo = str_replace("√£", "a", $varNovo);
+	$varNovo = str_replace("√µ", "o", $varNovo);
+	$varNovo = str_replace("√Å", "A", $varNovo);
+        $varNovo = str_replace("√Ç", "A", $varNovo);
+	$varNovo = str_replace("√ä", "E", $varNovo);
+	$varNovo = str_replace("√á", "C", $varNovo);
+	$varNovo = str_replace("√ç", "I", $varNovo);
+	$varNovo = str_replace("√ö", "U", $varNovo);
+	$varNovo = str_replace("√ì", "O", $varNovo);
+	$varNovo = str_replace("√É", "A", $varNovo);
+	$varNovo = str_replace("√ï", "O", $varNovo);
+	$varNovo = str_replace("√É", "A", $varNovo);
+	$varNovo = str_replace("√ï", "O", $varNovo);
+	$varNovo = str_replace("√Ä", "A", $varNovo);
 
 	//$varNovo = htmlentities($str);
 	return $varNovo;
@@ -215,9 +214,9 @@ function geraLoginAcesso($usuario, $cliCodigo, $ip, $lnk)			{
 	$sql .= "CURTIME(), '";
 	$sql .= $ip . "')";
 	//echo $sql . "<br><br>";
-	$varChecaExecucao = mysql_query($sql, $lnk);
+	$varChecaExecucao = mysqli_query($lnk, $sql);
 
-	setcookie("ckkSessao",mysql_insert_id($lnk));
+	setcookie("ckkSessao", mysqli_insert_id($lnk));
 	setcookie("ckkUsuario",$usuario);
 	setcookie("ckkCliente",$cliCodigo);
 
@@ -226,8 +225,8 @@ function geraLoginAcesso($usuario, $cliCodigo, $ip, $lnk)			{
 
 function checaPerformance($cliCodigo, $pagina, $tempo, $lnk)		{
 
-	//Se o tempo de renderizaÁ„o for maior que 2 anotar no banco de dados
-	//para futura an·lise.
+	//Se o tempo de renderizaÔøΩÔøΩo for maior que 2 anotar no banco de dados
+	//para futura anÔøΩlise.
 	if ($tempo > 2)		{
 		$sql = "INSERT INTO logper_logperformance ( ";
 		$sql .= " cliCodigo, ";
@@ -240,51 +239,14 @@ function checaPerformance($cliCodigo, $pagina, $tempo, $lnk)		{
 		$sql .= "CURDATE(), ";
 		$sql .= "" . $tempo . ")";
 
-		$varChecaExecucao = mysql_query($sql, $lnk);
+		$varChecaExecucao = mysqli_query($lnk, $sql);
 
-		//FunÁ„o de DEBUG de query
-		if (mysql_errno($lnk)>0)       {
+		//FunÔøΩÔøΩo de DEBUG de query
+		if (mysqli_errno($lnk)>0)       {
 		}
 	}
 }
 
-
-function pastaRaizParaGravacao()			{
-
-	$local = explode("/", $_SERVER['DOCUMENT_ROOT']);
-	$nroDir = count($local);
-	$dir = $local[$nroDir-2];
-
-	if ($dir == "ecomsys2")		{
-		return "/home/restricted/home/ecomsys2/public_html/ecomsys";
-	}
-
-	if ($dir == "jeffpres")		{
-		return "/home/jeffpres/public_html/ecomsys";
-	}
-
-	if ($dir == "swingjoy")		{
-		return "/home/swingjoy/public_html/ecomsys";
-	}
-
-	if ($dir == "wm2")		{
-		return "/home/restricted/home/wm2/public_html/ultra";
-	}
-}
-
-
-function temCliCodigoNaTabela($tab, $lnk)			{
-	$sql = "select * from " . $tab;
-	$result = mysql_query($sql, $lnk);
-	$fields = mysql_num_fields($result);
-	for ($i=0; $i < $fields; $i++) {
-		if (strtolower(mysql_field_name($result, $i)) == "clicodigo")		{
-			return true;
-		}
-	}
-
-	return false;
-}
 
 function retornaCssClassCombo()     {
     return "combobox custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left ui-autocomplete-input";

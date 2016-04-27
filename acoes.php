@@ -4,7 +4,7 @@ session_start();
 include 'includes/conexao.php';
 include './includes/montacombo.php';
 
-//Para onde a página será redirecionada
+//Para onde a pï¿½gina serï¿½ redirecionada
 $varDestino = $_POST["destino"];
 
 if ($_POST["acao"] == "I")   {
@@ -35,8 +35,9 @@ if ($_POST["acao"] == "I")   {
 			
 			//Verifica os pontos do alimento selecionado
 			$sql = "select pontos from alimentos where cod_alimento = " . $alimento[$i];
-			$res = mysql_query($sql, $link);
-			$pontoAlimento = mysql_result($res, 0, 0);
+			$res = mysqli_fetch_object(mysqli_query($link, $sql));
+                        
+			$pontoAlimento = $res->pontos;
 			$pontoAlimento = ($pontoAlimento*$_POST["qtde"]);
 			
 			$sql = "INSERT INTO pontos (cod_usuario, cod_alimento, data, cod_tprefeicao, qtde, valor) values (" . $_POST["cod_usuario"] . ", " . $alimento[$i] . ", '" . $_POST["ano"] . "-" . $_POST["mes"] . "-" . $_POST["dia"] . "', " . $_POST["cod_tprefeicao"] . ", " . $_POST["qtde"] . ", " . $pontoAlimento . ")";
@@ -81,13 +82,13 @@ if ($_POST["acao"] == "I")   {
                      exit;
              }
 
-             $_SESSION["cod_usuario"] = mysql_insert_id($link);
+             $_SESSION["cod_usuario"] = mysqli_insert_id($link);
 
             $varDestino = $_POST["destino"];
 	}
 }
 
-//Acao de exclusão
+//Acao de exclusï¿½o
 if ($_GET["acao"] == "D")      {
     
     if ($_GET["origem"] == "ponto")    {
@@ -119,9 +120,9 @@ if ($_POST["acao"]=="A")     {
         $sql .= "ehAlimPleno = " . $_POST["ehAlimPleno"] . " ";
         $sql .= "where ";
         $sql .= "cod_alimento = " . $_POST["cod_alimento"] . " ";
-        $res = mysql_query($sql, $link);
+        $res = mysqli_query($link, $sql);
         
-        $retorno = mysql_query($sql, $link);
+        $retorno = mysqli_query($link, $sql);
         
         if ($retorno)   {
             $varDestino .= "?cod_alimento=" . $_POST["cod_alimento"];
@@ -132,9 +133,9 @@ if ($_POST["acao"]=="A")     {
     } else if ($_POST["origem"]=="login")   {
         $sql = "SELECT cod_usuario FROM usuarios where email='" . $_POST["email"] . "' and senha=SHA1('" . $_POST["senha"] . "')";
         //echo $sql . "<br />";
-        $res = mysql_query($sql, $link);
-        if (mysql_num_rows($res)>0)	{
-            $lin = mysql_fetch_object($res);
+        $res = mysqli_query($link, $sql);
+        if (mysqli_num_rows($res)>0)	{
+            $lin = mysqli_fetch_object($res);
             $_SESSION["cod_usuario"] = $lin->cod_usuario;
             $varDestino = "pontos-insere.php";
         }   else    {
@@ -146,15 +147,15 @@ if ($_POST["acao"]=="A")     {
         //echo $_POST["email"]; exit;
         
         if (strpos($_POST["email"], "@")<3)     {
-            echo "O email informado é inválido.";
+            echo "O email informado ï¿½ invï¿½lido.";
             exit;
         }
         
         //Verifica se existe este usuario
         $sql = "SELECT cod_usuario FROM usuarios where email='" . $_POST["email"] . "'";
         //echo $sql . "<br />"; exit;
-        $res = mysql_query($sql, $link);
-        if (mysql_num_rows($res)>0)	{
+        $res = mysqli_query($link, $sql);
+        if (mysqli_num_rows($res)>0)	{
             
             $novaSenha = substr($_POST["email"], (strpos($_POST["email"], "@")-3), 2) . substr(time(), 5, 5);
             //echo $novaSenha. "<br />"; exit;
@@ -169,7 +170,7 @@ if ($_POST["acao"]=="A")     {
             $Name = "Site Elimina Peso"; //senders name 
             $email = "vg@novatrix.com.br"; //senders e-mail adress 
             $recipient = $_POST["email"]; //recipient 
-            $mail_body = "A sua nova senha é: " . $novaSenha . "\n\rNão se esqueça de trocá-la após o primeiro acesso."; //mail body 
+            $mail_body = "A sua nova senha ï¿½: " . $novaSenha . "\n\rNï¿½o se esqueï¿½a de trocï¿½-la apï¿½s o primeiro acesso."; //mail body 
             $subject = "Elimina Peso - Esqueci minha senha"; //subject 
             $header = "From: ". $Name . " <" . $email . ">\r\n"; //optional headerfields 
 
@@ -182,7 +183,7 @@ if ($_POST["acao"]=="A")     {
             $novaSenha = $_POST["novaSenha"];
             
             if (strlen($novaSenha)<4)   {
-                echo "Sua senha deve ter no mínimo 4 caracteres.";
+                echo "Sua senha deve ter no mï¿½nimo 4 caracteres.";
                 exit;
             }
             
@@ -204,10 +205,10 @@ if ($_POST["acao"]=="P")     {
             
             $sql = "SELECT cod_alimento, alimento FROM alimentos WHERE alimento like '" . $nome . "%'";
             //echo $sql . "<br />"; exit;
-            $res = mysql_query($sql, $link);
-            if (mysql_num_rows($res)>0)	{
+            $res = mysqli_query($link, $sql);
+            if (mysqli_num_rows($res)>0)	{
                 //Caso nao tenha retornado nenhum registro ou algum erro no banco
-                if (mysql_errno($link)>0 || mysql_num_rows($res)<1)     {
+                if (mysqli_errno($link)>0 || mysqli_num_rows($res)<1)     {
                     $retorno = array('nroReg' => 0, 'registros' => null);
                     echo json_encode($retorno);
                     exit;
@@ -216,11 +217,11 @@ if ($_POST["acao"]=="P")     {
 
                     $arr = array();
 
-                    while ($linha = mysql_fetch_object($res))   {
+                    while ($linha = mysqli_fetch_object($res))   {
                         $arr[] = $linha;
                     }
 
-                    $retorno = array('nroReg' => mysql_num_rows($res), 'registros' => $arr);
+                    $retorno = array('nroReg' => mysqli_num_rows($res), 'registros' => $arr);
 
                     echo json_encode($retorno);
                     exit;
@@ -233,11 +234,11 @@ if ($_POST["acao"]=="P")     {
 //Executa os comandos SQL de Insert , Delete, Update
 function executaIDU($sql, $link)	{
 	if (isset($sql) && strlen($sql)>6)	{
-		$varChecaExecucao = mysql_query($sql, $link);
+		$varChecaExecucao = mysqli_query($link, $sql);
 		if (!$varChecaExecucao)		{
-			echo "Houve um problema na comunicação com o banco de dados.<br/>";
+			echo "Houve um problema na comunicacao com o banco de dados.<br/>";
 			echo "Por favor copie e cole este erro e envie por email a jeffprestes@gmail.com. Obrigado.<br/>";
-			echo mysql_errno($link) . " - " . mysql_error($link) . "<br />" . $sql;
+			echo mysqli_errno($link) . " - " . mysqli_error($link) . "<br />" . $sql;
 		}
 		return $varChecaExecucao;
 	}	else	{
@@ -245,7 +246,7 @@ function executaIDU($sql, $link)	{
 	}
 }
 
-mysql_close($link);
+mysqli_close($link);
 header("Location: " . $varDestino);
 //echo $varDestino;
 

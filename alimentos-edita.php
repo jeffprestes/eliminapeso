@@ -9,13 +9,13 @@ $sql = "SELECT alimento,\n"
     . "pontos,\n"
     . "ehAlimPleno FROM alimentos WHERE cod_alimento=" . $_GET['cod_alimento'];
 
-$res = mysql_query($sql, $link);
-$lin = mysql_fetch_array($res, MYSQL_ASSOC);
+$res = mysqli_query($link, $sql);
+$lin = mysqli_fetch_array($res, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset=iso-8859-1" />
+<meta charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tabela Elimina Peso - Alimentos - Edi&ccedil;&atilde;o</title>
 <style type="text/css">
@@ -51,9 +51,9 @@ body {
         <th width="15%" scope="row"><div align="right" class="labelCampo">Tipo: </div></th>
         <td width="85%" align="left">
 		<? $sql = "select cod_tipo_alimento as objCodigo, descricao as objDescricao from tipo_alimentos order by descricao";
-		   $res = mysql_query($sql, $link);
+		   $res = mysqli_query($link, $sql);
 		   montaComboComFuncaoComTabIndex($res, "cod_tipo_alimento", $lin["cod_tipo_alimento"], "", "1");
-		   mysql_free_result($res);
+		   mysqli_free_result($res);
 		 ?>
         </td>
       </tr>
@@ -65,9 +65,9 @@ body {
         <th scope="row"><div align="right" class="labelCampo">Quantidade:</div></th>
         <td align="left">
 		<? $sql = "select cod_quant as objCodigo, descricao as objDescricao from quantidades order by descricao";
-		   $res = mysql_query($sql, $link);
+		   $res = mysqli_query($link, $sql);
 		   montaComboComFuncaoComTabIndex($res, "cod_quant", $lin["cod_quant"], "", "3");
-		   mysql_free_result($res);
+		   mysqli_free_result($res);
 		 ?>
         </td>
       </tr>
@@ -75,9 +75,9 @@ body {
         <th scope="row"><div align="right" class="labelCampo">Medida:</div></th>
         <td align="left">
 	    <? $sql = "select cod_medida as objCodigo, descricao as objDescricao from medidas order by descricao";
-		   $res = mysql_query($sql, $link);
+		   $res = mysqli_query($link, $sql);
 		   montaComboComFuncaoComTabIndex($res, "cod_medida", $lin["cod_medida"], "", "4");
-		   mysql_free_result($res);
+		   mysqli_free_result($res);
 		 ?>
         </td>
       </tr>
@@ -88,9 +88,9 @@ body {
     <td align="left"><input name="pontos" type="text" class="caixaTexto" value="<?=$lin["pontos"]?>" id="pontos" size="5" maxlength="2" tabindex="5" /></td>
       </tr>
       <tr>
-        <th scope="row"><div align="right" class="labelCampo">É Alim. Pleno? </div></th>
+        <th scope="row"><div align="right" class="labelCampo">Ã‰ Alim. Pleno? </div></th>
     <td align="left"><select name="ehAlimPleno" id="ehAlimPleno" tabindex="6">
-                            <option value="0" <? if ($lin["ehAlimPleno"]==0) { echo "selected"; } ?>>Não</option>
+                            <option value="0" <? if ($lin["ehAlimPleno"]==0) { echo "selected"; } ?>>NÃ£o</option>
                             <option value="1" <? if ($lin["ehAlimPleno"]==1) { echo "selected"; } ?>>Sim</option>
                         </select>
       </tr>
@@ -114,6 +114,3 @@ body {
 </table>
 </body>
 </html>
-<?
-mysql_close($link);
-?>
